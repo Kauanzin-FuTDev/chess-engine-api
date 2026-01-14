@@ -1,6 +1,6 @@
 ﻿using Chess_Domain.Entities;
 
-namespace Chess_Domain.Chess_game;
+namespace Chess_Application.Converters;
 
 public class BoardConversion
 {

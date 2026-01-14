@@ -6,7 +6,7 @@ namespace Chess_Domain.Chess_game.Pieces;
 
 public class Pawn : Piece
 {
-    public Pawn(Color color, Board board) : base(color,board) { }
+    public Pawn(Color color) : base(color) { }
     public override bool IsValid(Position from, Position to, Board board)
     {
         if (from.Row == 2 || from.Row == 6)

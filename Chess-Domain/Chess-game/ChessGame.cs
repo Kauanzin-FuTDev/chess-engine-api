@@ -8,15 +8,15 @@ namespace Chess_Domain.Chess_game;
 
 public class ChessGame
 {
-    private Board Board { get; set; }
+    private Board Board { get;  set; }
     private int Turn { get; set; }
-    private Color Color { get; set; }
+    private Color GamerColor { get; set; }
 
     public ChessGame()
     {
         Board = new Board();
         Turn = 1;
-        Color = Color.White;
+        GamerColor = Color.White;
         SetUpPieces();
     }
 
@@ -29,8 +29,29 @@ public class ChessGame
     }
     
     private void SetUpPieces()
-    {   
-        Board.AddPiece(new Pawn(Color.White, Board), new BoardConversion('a' , 2).ToPosition());
+    {   //branco
+        for (int column = 0; column < 8; column++)
+        {
+            Board.AddPiece(new Pawn(Color.White), new Position(column, 1));
+        }
+        for(int column = 0; column < 8; column +=7)
+        {
+            Board.AddPiece(new Tower(Color.White), new Position(column, 0));
+        }
+        
+        
+        //preto
+        for (int column = 0; column < 8; column++)
+        {
+            Board.AddPiece(new Pawn(Color.Black), new Position(column, 6));
+        }
+        
+        for (int column = 0; column < 8; column += 7)
+        {
+            Board.AddPiece(new Tower(Color.Black), new Position(column, 7));
+        }
+        
+        
     }
     
     
