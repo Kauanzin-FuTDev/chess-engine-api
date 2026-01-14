@@ -1,24 +1,60 @@
 ﻿using Chess_Domain.Entities.Commun;
+using Chess_Domain.Exception;
 
 namespace Chess_Domain.Entities;
 
 public class Board
 {
-    public int Collumns { get;}
-    public int Rows { get; }       
-    
+    private int Columns { get;}
+    private int Rows { get; }
+
     private readonly Piece[,] _pieces;
 
-    public Board(int collumns = 8, int rows = 8)
+    public Board(int columns = 8, int rows = 8)
     {
-        Collumns = collumns;
+        Columns = columns;
         Rows = rows;
-        _pieces = new Piece[collumns, rows];
+        _pieces = new Piece[columns, rows];
     }
     
     
-    public void AddPiece(Piece piece)
+    public void AddPiece(Piece piece, Position pos)
+    {     
+        if (ExistsPiece(pos))
+            throw new DomainException("There is already a piece in this position");
+        
+        _pieces[pos.Column, pos.Row] = piece;
+        piece.Position = pos;
+    }
+
+    public Piece RemovePiece(Position pos)
     {
-        _pieces[piece.Position.Collumn, piece.Position.Row] = piece;
+        if (PiecePosition(pos) == null)
+            return null;
+        Piece aux = PiecePosition(pos);
+        aux.Position = null;
+        _pieces[pos.Column, pos.Row] = null;
+        return aux;
     }
+    
+    public bool ExistsPiece(Position pos)
+    {
+        ValidePosition(pos);
+        return PiecePosition(pos) != null;
+    }
+    
+    private Piece PiecePosition(Position pos)
+    {
+        return _pieces[pos.Column, pos.Row];
+    }
+
+    private bool ValidePosition(Position pos)
+    {
+        if (pos.Row < 0 || pos.Row > Rows || pos.Column < 0 || pos.Column > Columns)
+            throw new DomainException("Position not valid");
+        
+        return true;
+    }
+    
+    
 }

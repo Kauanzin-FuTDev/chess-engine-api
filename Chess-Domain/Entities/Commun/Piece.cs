@@ -6,15 +6,19 @@ public abstract class Piece
 {
     public int QuantityMove { get; protected set; }
     public  Color _color { get; private set; }
-    public Position Position { get; protected set; }
-    public Board Board { get; protected set; }
-    
-    public Piece(Color color, Position position, Board board)
+    public Position Position { get; set; }
+    public Board Board { get; set; }
+
+    protected Piece(Color color ,Board board)
     {
+        Position = null;
         _color = color;
-        Position = position;
         Board = board;
         QuantityMove = 0;
+    }
+    public void IncreaseQuantityMove()
+    {
+        QuantityMove++;
     }
 
 

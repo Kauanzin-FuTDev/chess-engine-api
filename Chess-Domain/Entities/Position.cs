@@ -2,13 +2,13 @@
 
 public class Position
 {
-    public int Collumn { get; set; }
+    public int Column { get; set; }
     public int Row { get; set; }
     
     
-    public Position(int collumn, int row)
+    public Position(int column, int row)
     {
-        Collumn = collumn;
+        Column = column;
         Row = row;
     }
 }
