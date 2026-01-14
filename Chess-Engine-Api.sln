@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess-infrastructure", "Che
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess-Application", "Chess-Application\Chess-Application.csproj", "{7677FAFE-AEC1-4F52-B448-D4B047FB4FE7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chess-Ioc", "Chess-Ioc\Chess-Ioc.csproj", "{FADD8F7B-C0F7-4965-B7FD-E71E99C9CADC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{7677FAFE-AEC1-4F52-B448-D4B047FB4FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7677FAFE-AEC1-4F52-B448-D4B047FB4FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7677FAFE-AEC1-4F52-B448-D4B047FB4FE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FADD8F7B-C0F7-4965-B7FD-E71E99C9CADC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FADD8F7B-C0F7-4965-B7FD-E71E99C9CADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FADD8F7B-C0F7-4965-B7FD-E71E99C9CADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FADD8F7B-C0F7-4965-B7FD-E71E99C9CADC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
