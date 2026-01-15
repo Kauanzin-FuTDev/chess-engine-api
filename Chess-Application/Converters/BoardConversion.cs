@@ -2,19 +2,10 @@
 
 namespace Chess_Application.Converters;
 
-public class BoardConversion
+public static class BoardConversion
 {
-    private char Column { get; set; }
-    private int Row { get; set; }
-
-    public BoardConversion(char column, int row)
+    public static Position ToPosition(char column, int row)
     {
-        Column = column;
-        Row = row;
-    }
-    
-    public Position ToPosition()
-    {
-        return new Position(Column - 'a', Row - 1);
+        return new Position(column - 'a', row - 1);
     }
 }
