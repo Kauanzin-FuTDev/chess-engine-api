@@ -13,6 +13,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Chess-Application\Chess-Application.csproj" />
+      <ProjectReference Include="..\Chess-Ioc\Chess-Ioc.csproj" />
     </ItemGroup>
 
 </Project>

@@ -7,9 +7,14 @@ namespace Chess_Domain.Chess_game.Pieces;
 public class Pawn : Piece
 {
     public Pawn(Color color) : base(color) { }
+    
+    public override string ToString()
+    {
+        return "P";
+    }
     public override bool IsValid(Position from, Position to, Board board)
     {
-        if (from.Row == 2 || from.Row == 6)
+        if (from.Row == 1 || from.Row == 6)
         {
             if (to.Row == from.Row + 2 || to.Row == from.Row - 2)
             {

@@ -12,10 +12,25 @@ public class StartGameHandler
         _repository = repository;
     }
 
-    public async Task Handle(StartGameCommand command)
+    public async Task<StartGameResult> Handle(StartGameCommand command)
     {
-        ChessGame game = new ChessGame();
+        var game = ChessGame.Start();
+        
         await _repository.SaveAsync(game);
+
+        if (game == null)
+        {
+            return new StartGameResult
+            {
+                Success = false,
+                GameId = Guid.Empty
+            };
+        }
+        return new StartGameResult
+        {
+            Success = true,
+            GameId = game.Id
+        };
     }
     
     

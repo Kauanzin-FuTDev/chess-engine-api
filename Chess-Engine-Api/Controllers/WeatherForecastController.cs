@@ -4,7 +4,7 @@ namespace Chess_Engine_Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class WeatherForecastController 
 {
     private static readonly string[] Summaries = new[]
     {

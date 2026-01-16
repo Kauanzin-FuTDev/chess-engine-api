@@ -4,7 +4,6 @@ namespace Chess_Domain.Repository;
 
 public interface IChessGameRepository
 {
-    Task<ChessGame> GameStart();
     Task<ChessGame> GetById(Guid id);
-    Task<Guid> SaveAsync(ChessGame game);
+    Task SaveAsync(ChessGame game);
 }
