@@ -15,7 +15,7 @@ public class ChessGame
     private int PieceQuantity => Board.CountPieces();
    
 
-    public ChessGame()
+    private ChessGame()
     {
         Id = Guid.NewGuid();
         Board = new Board();
@@ -23,6 +23,7 @@ public class ChessGame
         GamerColor = Color.White;
         SetUpPieces();
     }
+   
 
     public static ChessGame Start()
     {
