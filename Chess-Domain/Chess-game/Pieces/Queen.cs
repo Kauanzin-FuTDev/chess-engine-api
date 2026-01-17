@@ -14,7 +14,7 @@ public class Queen : Piece
     {
         return "Q";
     }
-    public override bool IsValid(Position from, Position to, Board board)
+    public override bool Move(Position from, Position to)
     {
         return true;
     }

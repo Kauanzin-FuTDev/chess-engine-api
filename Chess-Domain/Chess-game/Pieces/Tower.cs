@@ -10,10 +10,8 @@ public class Tower : Piece
     {
     }
 
-    public override bool IsValid(Position from, Position to, Board board)
+    public override bool Move(Position from, Position to)
     {
-        if(from.Column == to.Column || from.Row == to.Row) return true;
-        
-        return false;
+        return true;
     }
 }

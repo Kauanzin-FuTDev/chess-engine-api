@@ -5,10 +5,14 @@ namespace Chess_Domain.Entities;
 
 public class Board
 {
+    #region Attributes
     private int Columns { get;}
     private int Rows { get; }
     private readonly Piece[,] _pieces;
-
+    
+    #endregion
+    
+    #region Constructor
     public Board(int columns = 8, int rows = 8)
     {
         Columns = columns;
@@ -16,6 +20,29 @@ public class Board
         _pieces = new Piece[columns, rows];
         
     }
+    #endregion
+    
+    #region Methods
+    
+    public bool ValidMove(Piece piece,Position from, Position to)
+    {
+       if(!piece.Move(from, to))
+       {
+           return false;
+       }
+       
+       else if (ExistsPiece(to))
+       {
+           Piece aux = PiecePosition(to);
+           if(aux._color == piece._color) 
+               return false;
+           return true;
+       }
+
+       else return true;
+    }
+    
+    
     
     public void AddPiece(Piece piece, Position pos)
     {     
@@ -26,20 +53,6 @@ public class Board
         piece.Position = pos;
     }
     
-    public IEnumerable<Piece> GetPieces()
-    {
-        for (int row = 0; row < Rows; row++)
-        {
-            for (int column = 0; column < Columns; column++)
-            {
-                var piece = _pieces[column, row];
-                if (piece != null)
-                    yield return piece;
-            }
-        }
-    }
-    
-
     public Piece RemovePiece(Position pos)
     {
         if (PiecePosition(pos) == null)
@@ -54,6 +67,33 @@ public class Board
     {
         ValidePosition(pos);
         return PiecePosition(pos) != null;
+    }
+    
+    private Piece PiecePosition(Position pos)
+    {
+        return _pieces[pos.Column, pos.Row];
+    }
+
+    private bool ValidePosition(Position pos)
+    {
+        if (pos.Row < 0 || pos.Row >= Rows || pos.Column < 0 || pos.Column >= Columns)
+            throw new DomainException("Position not valid");
+        
+        return true;
+    }
+    
+    
+    public IEnumerable<Piece> GetPieces()
+    {
+        for (int row = 0; row < Rows; row++)
+        {
+            for (int column = 0; column < Columns; column++)
+            {
+                var piece = _pieces[column, row];
+                if (piece != null)
+                    yield return piece;
+            }
+        }
     }
     
     public int CountPieces()
@@ -73,18 +113,7 @@ public class Board
         return count;
     }
     
-    private Piece PiecePosition(Position pos)
-    {
-        return _pieces[pos.Column, pos.Row];
-    }
 
-    private bool ValidePosition(Position pos)
-    {
-        if (pos.Row < 0 || pos.Row >= Rows || pos.Column < 0 || pos.Column >= Columns)
-            throw new DomainException("Position not valid");
-        
-        return true;
-    }
-    
+    #endregion
     
 }

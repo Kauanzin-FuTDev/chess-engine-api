@@ -14,8 +14,11 @@ public class King : Piece
     {
         return "K";
     }
-    public override bool IsValid(Position from, Position to, Board board)
+    public override bool Move(Position from, Position to)
     {
-        return true;
+        int columnDiff = Math.Abs(from.Column - to.Column);
+        int rowDiff = Math.Abs(from.Row - to.Row);
+
+        return columnDiff <= 1 || rowDiff <= 1 && (columnDiff > 0 || rowDiff > 0);
     }
 }

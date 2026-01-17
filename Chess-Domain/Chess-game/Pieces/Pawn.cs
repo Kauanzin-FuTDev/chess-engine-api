@@ -12,7 +12,7 @@ public class Pawn : Piece
     {
         return "P";
     }
-    public override bool IsValid(Position from, Position to, Board board)
+    public override bool Move(Position from, Position to)
     {
         if (from.Row == 1 || from.Row == 6)
         {
