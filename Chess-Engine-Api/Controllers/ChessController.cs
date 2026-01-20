@@ -1,4 +1,5 @@
 ﻿
+using Chess_Application.UseCases.Commands.MoveUseCases;
 using Chess_Application.UseCases.StartGame;
 using Chess_Application.UseCases.ViewGame;
 using Chess_Domain.Exception;
@@ -15,12 +16,15 @@ public class ChessController : ControllerBase
     private readonly ILogger<ChessController> _logger;
     private readonly StartGameHandler _startGameHandler;
     private readonly ViewGameHandler _viewGameHandler;
+    private readonly MoveHandler _moveHandler;
 
-    public ChessController(ILogger<ChessController> logger, StartGameHandler StartGameHandler, ViewGameHandler ViewGameHandler)
+    public ChessController(ILogger<ChessController> logger, StartGameHandler StartGameHandler, ViewGameHandler ViewGameHandler,
+        MoveHandler MoveHandler)
     {
         _logger = logger;
         _startGameHandler = StartGameHandler;
         _viewGameHandler = ViewGameHandler;
+        _moveHandler = MoveHandler;
     }
     
     
@@ -49,6 +53,31 @@ public class ChessController : ControllerBase
             return Problem(ex.Message, statusCode: StatusCodes.Status500InternalServerError);
         }
     }
+
+    [HttpPost("Move/{id:guid}")]
+    public async Task<IActionResult> Move([FromBody] MoveCommand command)
+    {
+        try
+        {
+            var result = await _moveHandler.Handle(command);
+            _logger.LogInformation("Making a move in game {GameId} from {From} to {To}", command.GameId, command.From, command.To);
+            return Ok(result);
+        }
+        catch (ApplicationException ex)
+        {
+            return NotFound(ex.Message);
+        }
+        catch (DomainException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "An error occurred while logging a move in a chess game.");
+            return Problem(ex.Message, statusCode: StatusCodes.Status500InternalServerError);
+        }
+    }
+    
 
     [HttpGet("ViewGame/{id:guid}")]
     public async Task<IActionResult> ViewGame(Guid id)

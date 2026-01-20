@@ -69,7 +69,7 @@ public class Board
         return PiecePosition(pos) != null;
     }
     
-    private Piece PiecePosition(Position pos)
+    public Piece PiecePosition(Position pos)
     {
         return _pieces[pos.Column, pos.Row];
     }

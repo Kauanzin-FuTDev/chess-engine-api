@@ -3,6 +3,7 @@ using Chess_Domain.Chess_game.Pieces;
 using Chess_Domain.Entities;
 using Chess_Domain.Entities.Commun;
 using Chess_Domain.Entities.Enums;
+using Chess_Domain.Exception;
 
 namespace Chess_Domain.Chess_game;
 
@@ -33,9 +34,15 @@ public class ChessGame
     
     public void Movement(Position from, Position to)
     {
-        Piece p = Board.RemovePiece(from);
+        Piece p = Board.PiecePosition(from);
+
+        if (!this.Board.ValidMove(p, from, to))
+            throw new DomainException("Move not valid");
+        Board.RemovePiece(from);
+        Piece capPiece = Board.PiecePosition(to);
+        if (capPiece != null)
+            Board.RemovePiece(to);
         p.IncreaseQuantityMove();
-        Piece pieceCapture = Board.RemovePiece(to);
         Board.AddPiece(p, to);
     }
     
@@ -94,7 +101,5 @@ public class ChessGame
         if(PieceQuantity == 0) return true;
         return false;
     }
-    
-    
     
 }

@@ -23,6 +23,13 @@ public class Pawn : Piece
                     return true;
                 }
             }
+            else if (to.Row == from.Row + 1 || to.Row == from.Row - 1)
+            {
+                if (to.Column == from.Column)
+                {
+                    return true;
+                }
+            }
             return false;
         }
         else
