@@ -111,7 +111,7 @@ POST /api/v1/games/{gameId}/moves
 }
 ```
 
-### 📘 Representação do Tabuleiro
+## 📘 Representação do Tabuleiro
 
 A API retorna as peças no formato:
 ```
