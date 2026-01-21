@@ -16,14 +16,7 @@ public class Pawn : Piece
     {
         if (from.Row == 1 || from.Row == 6)
         {
-            if (to.Row == from.Row + 2 || to.Row == from.Row - 2)
-            {
-                if (to.Column == from.Column)
-                {
-                    return true;
-                }
-            }
-            else if (to.Row == from.Row + 1 || to.Row == from.Row - 1)
+            if (to.Row == from.Row + 2 || to.Row == from.Row - 2 || to.Row == from.Row + 1 || to.Row == from.Row - 1)
             {
                 if (to.Column == from.Column)
                 {

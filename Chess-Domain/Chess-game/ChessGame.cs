@@ -54,7 +54,7 @@ public class ChessGame
         }
         for(int column = 0; column < 8; column +=7)
         {
-            Board.AddPiece(new Tower(Color.White), new Position(column, 0));
+            Board.AddPiece(new Rook(Color.White), new Position(column, 0));
         }
 
         for (int column = 1; column < 8; column+=5)
@@ -80,7 +80,7 @@ public class ChessGame
         
         for (int column = 0; column < 8; column += 7)
         {
-            Board.AddPiece(new Tower(Color.Black), new Position(column, 7));
+            Board.AddPiece(new Rook(Color.Black), new Position(column, 7));
         }
 
         for (int column = 1; column < 8; column += 5)
