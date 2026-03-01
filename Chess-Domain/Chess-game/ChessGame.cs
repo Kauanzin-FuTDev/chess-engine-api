@@ -31,18 +31,23 @@ public class ChessGame
         ChessGame game = new ChessGame();
         return game;    
     }
-    
+
     public void Movement(Position from, Position to)
     {
         Piece p = Board.PiecePosition(from);
+
+        if (p == null)
+            throw new DomainException("Dont have a piece in this position");
 
         if (!this.Board.ValidMove(p, from, to))
             throw new DomainException("Move not valid");
         Board.RemovePiece(from);
         Piece capPiece = Board.PiecePosition(to);
         if (capPiece != null)
+        {
             Board.RemovePiece(to);
-        p.IncreaseQuantityMove();
+        }
+    p.IncreaseQuantityMove();
         Board.AddPiece(p, to);
     }
     

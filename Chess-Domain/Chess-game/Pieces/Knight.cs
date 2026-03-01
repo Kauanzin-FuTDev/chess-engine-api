@@ -19,4 +19,9 @@ public class Knight : Piece
     {
         return true;
     }
+
+    public override bool CanCapture(Position from, Position to)
+    {
+        throw new NotImplementedException();
+    }
 }

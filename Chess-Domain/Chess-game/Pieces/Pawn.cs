@@ -12,6 +12,7 @@ public class Pawn : Piece
     {
         return "P";
     }
+    
     public override bool Move(Position from, Position to)
     {
         if (from.Row == 1 || from.Row == 6)
@@ -36,5 +37,14 @@ public class Pawn : Piece
             }
             return false;
         }
+    }
+
+    public override bool CanCapture(Position from, Position to)
+    {
+        if (from.Row + 1 == to.Row && (from.Column + 1 == to.Column || from.Column - 1 == to.Column)  )
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -19,4 +19,9 @@ public class Rook : Piece
         }
         return false;
     }
+
+    public override bool CanCapture(Position from, Position to)
+    {
+        throw new NotImplementedException();
+    }
 }

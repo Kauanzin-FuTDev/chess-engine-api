@@ -22,4 +22,6 @@ public abstract class Piece
 
 
     public abstract bool Move(Position from, Position to);
+    public abstract bool CanCapture(Position from, Position to);
+    
 }

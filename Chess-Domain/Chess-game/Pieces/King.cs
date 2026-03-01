@@ -19,6 +19,11 @@ public class King : Piece
         int columnDiff = Math.Abs(from.Column - to.Column);
         int rowDiff = Math.Abs(from.Row - to.Row);
 
-        return columnDiff <= 1 || rowDiff <= 1 && (columnDiff > 0 || rowDiff > 0);
+        return columnDiff <= 1 && rowDiff <= 1 && (columnDiff > 0 || rowDiff > 0);
+    }
+
+    public override bool CanCapture(Position from, Position to)
+    {
+        throw new NotImplementedException();
     }
 }

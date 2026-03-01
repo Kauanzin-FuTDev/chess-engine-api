@@ -54,7 +54,7 @@ public class ChessController : ControllerBase
         }
     }
 
-    [HttpPost("Move/{id:guid}")]
+    [HttpPost("Move/")]
     public async Task<IActionResult> Move([FromBody] MoveCommand command)
     {
         try

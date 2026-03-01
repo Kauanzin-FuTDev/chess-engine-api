@@ -1,4 +1,5 @@
-﻿using Chess_Domain.Entities.Commun;
+﻿using Chess_Domain.Chess_game.Pieces;
+using Chess_Domain.Entities.Commun;
 using Chess_Domain.Exception;
 
 namespace Chess_Domain.Entities;
@@ -30,11 +31,13 @@ public class Board
        {
            return false;
        }
+
+       
        
        else if (ExistsPiece(to))
        {
            Piece aux = PiecePosition(to);
-           if(aux._color == piece._color) 
+           if(aux._color == piece._color || !piece.CanCapture(from,to)) 
                return false;
            return true;
        }
