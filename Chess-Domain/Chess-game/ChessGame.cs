@@ -3,6 +3,7 @@ using Chess_Domain.Chess_game.Pieces;
 using Chess_Domain.Entities;
 using Chess_Domain.Entities.Commun;
 using Chess_Domain.Entities.Enums;
+using Chess_Domain.Exception;
 
 namespace Chess_Domain.Chess_game;
 
@@ -15,7 +16,7 @@ public class ChessGame
     private int PieceQuantity => Board.CountPieces();
    
 
-    public ChessGame()
+    private ChessGame()
     {
         Id = Guid.NewGuid();
         Board = new Board();
@@ -23,18 +24,30 @@ public class ChessGame
         GamerColor = Color.White;
         SetUpPieces();
     }
+   
 
     public static ChessGame Start()
     {
         ChessGame game = new ChessGame();
         return game;    
     }
-    
+
     public void Movement(Position from, Position to)
     {
-        Piece p = Board.RemovePiece(from);
-        p.IncreaseQuantityMove();
-        Piece pieceCapture = Board.RemovePiece(to);
+        Piece p = Board.PiecePosition(from);
+
+        if (p == null)
+            throw new DomainException("Dont have a piece in this position");
+
+        if (!this.Board.ValidMove(p, from, to))
+            throw new DomainException("Move not valid");
+        Board.RemovePiece(from);
+        Piece capPiece = Board.PiecePosition(to);
+        if (capPiece != null)
+        {
+            Board.RemovePiece(to);
+        }
+    p.IncreaseQuantityMove();
         Board.AddPiece(p, to);
     }
     
@@ -46,7 +59,7 @@ public class ChessGame
         }
         for(int column = 0; column < 8; column +=7)
         {
-            Board.AddPiece(new Tower(Color.White), new Position(column, 0));
+            Board.AddPiece(new Rook(Color.White), new Position(column, 0));
         }
 
         for (int column = 1; column < 8; column+=5)
@@ -72,7 +85,7 @@ public class ChessGame
         
         for (int column = 0; column < 8; column += 7)
         {
-            Board.AddPiece(new Tower(Color.Black), new Position(column, 7));
+            Board.AddPiece(new Rook(Color.Black), new Position(column, 7));
         }
 
         for (int column = 1; column < 8; column += 5)
@@ -93,7 +106,5 @@ public class ChessGame
         if(PieceQuantity == 0) return true;
         return false;
     }
-    
-    
     
 }

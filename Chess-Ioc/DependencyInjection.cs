@@ -1,4 +1,5 @@
 ﻿
+using Chess_Application.UseCases.Commands.MoveUseCases;
 using Chess_Application.UseCases.StartGame;
 using Chess_Application.UseCases.ViewGame;
 using Chess_Domain.Repository;
@@ -11,7 +12,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-         services.AddScoped<IChessGameRepository, ChessGameRepository>();
+        services.AddScoped<IChessGameRepository, ChessGameRepository>();
         return services;
     }
 
@@ -19,6 +20,7 @@ public static class DependencyInjection
     {
         services.AddScoped<StartGameHandler>();
         services.AddScoped<ViewGameHandler>();
+        services.AddScoped<MoveHandler>();
         return services;
     }
 }

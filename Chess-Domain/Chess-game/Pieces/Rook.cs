@@ -4,19 +4,20 @@ using Chess_Domain.Entities.Enums;
 
 namespace Chess_Domain.Chess_game.Pieces;
 
-public class Queen : Piece
+public class Rook : Piece
 {
-    public Queen(Color color) : base(color)
+    public override string ToString() => "R";
+    public Rook(Color color) : base(color)
     {
     }
     
-    public override string ToString()
-    {
-        return "Q";
-    }
     public override bool Move(Position from, Position to)
     {
-        return true;
+        if (from.Column == to.Column || from.Row == to.Row)
+        {
+            return true;
+        }
+        return false;
     }
 
     public override bool CanCapture(Position from, Position to)

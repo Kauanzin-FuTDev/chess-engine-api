@@ -13,17 +13,41 @@ public class MoveHandler
     {
         _repository = repository;
     }
-    
-    
-    public async Task Handle(MoveCommand command)
+
+
+    public async Task<MoveResult> Handle(MoveCommand command)
     {
         ChessGame game = await _repository.GetById(command.GameId);
+        if (game == null)
+            throw new ApplicationException("Game not found!");
         
+        if (command.From[0] < 'a' || command.From[0] > 'h' || int.Parse(command.From[1].ToString()) < 1 || int.Parse(command.From[1].ToString()) > 8 ||
+            command.To[0] < 'a' || command.To[0] > 'h' || int.Parse(command.To[1].ToString()) < 1 || int.Parse(command.To[1].ToString()) > 8)
+            throw new ApplicationException("Position not valid(ex: (a1, b2) are positiions valids!!!");
+
         var from = BoardConversion.ToPosition(command.From[0], int.Parse(command.From[1].ToString()));
         var to = BoardConversion.ToPosition(command.To[0], int.Parse(command.To[1].ToString()));
-        
         game.Movement(from, to);
         
         await _repository.SaveAsync(game);
+
+         return new MoveResult
+        {
+            GameId = game.Id,
+            Success = true,
+            IsCheck = false,
+            IsCheckMate = false,
+            Message = $"Moved from : {from} to: {to}",
+            PieceMoved = new Dtos.PieceView
+            {
+                Type = game.Board.PiecePosition(to).GetType().Name,
+                Color = game.Board.PiecePosition(to)._color.ToString(),
+                Position = command.To
+            }
+        };
+
+
+
+
     }
 }
